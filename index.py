@@ -7,7 +7,7 @@ import time
 import os, psutil
 process = psutil.Process(os.getpid())
 
-nmbs = range(10, 2000)
+nmbs = range(10, 1500)
 REPEATS = 5
 
 g = create_random_flow_graph(20, 5)
@@ -51,7 +51,7 @@ single_time_pp = t_pp/(len(g.nodes()) ** 2 * math.sqrt(e))
 
 #running time O(|V|*|E|^2)
 plt.scatter(x=nmbs, y=times_ek, label='Edmonds Karp alg', marker='+', alpha=0.2)
-plt.plot(nmbs, [nmb * edges_nmbs[n-10] ** 2 * single_time_ek for n in nmbs], label='nlogn')
+plt.plot(nmbs, [nmb * edges_nmbs[n-10] ** 2 * single_time_ek for n in nmbs], label='Predicted result')
 plt.legend()
 plt.title('Execution time [ms] for Edmonds-Karp algorithm')
 plt.savefig('./edmonds_karp.png')
@@ -59,7 +59,7 @@ plt.show()
 
 #running time O(|V|^2* SQRT(|E|))
 plt.scatter(x=nmbs, y=times_pp, label='Preflow Push algorithm', marker='+', alpha=0.2)
-plt.plot(nmbs, [nmb ** 2 * math.sqrt(edges_nmbs[n-10])  * single_time_pp for n in nmbs], label='nlogn')
+plt.plot(nmbs, [nmb ** 2 * math.sqrt(edges_nmbs[n-10])  * single_time_pp for n in nmbs], label='Predicted result')
 plt.legend()
 plt.title('Execution time [ms] for Preflow-Push algorithm')
 plt.savefig('./preflow_push.png')
